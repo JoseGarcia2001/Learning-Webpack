@@ -9,10 +9,11 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main[contenthash].js",
+    filename: "main.js",
     clean: true,
   },
-  mode: "production",
+  mode: "development",
+  watch: true,
   resolve: {
     extensions: [".js"],
     alias: {
@@ -42,14 +43,14 @@ module.exports = {
         test: /\.png/,
         type: "asset/resource",
         generator: {
-          filename: "assets/images/[name][hash][ext][query]",
+          filename: "assets/images/[name][ext][query]",
         },
       },
       {
         test: /\.(woff|woff2)$/,
         type: "asset/resource",
         generator: {
-          filename: "assets/fonts/[name][hash][ext]",
+          filename: "assets/fonts/[name][ext]",
         },
       },
     ],
@@ -59,12 +60,8 @@ module.exports = {
       template: "./public/index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
+      filename: "[name].css",
     }),
     new DotenvWebpack(),
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [new CssMinizerWebpackPlugin(), new TercerWebpackPlugin()],
-  },
 };
