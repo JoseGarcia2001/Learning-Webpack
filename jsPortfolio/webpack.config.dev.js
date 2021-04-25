@@ -1,9 +1,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinizerWebpackPlugin = require("css-minimizer-webpack-plugin");
-const TercerWebpackPlugin = require("terser-webpack-plugin");
 const DotenvWebpack = require("dotenv-webpack");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+
+module.exports = {
+  plugins: [new BundleAnalyzerPlugin()],
+};
 
 module.exports = {
   entry: "./src/index.js",
@@ -13,7 +17,7 @@ module.exports = {
     clean: true,
   },
   mode: "development",
-  watch: true,
+  devtool: "source-map",
   resolve: {
     extensions: [".js"],
     alias: {
